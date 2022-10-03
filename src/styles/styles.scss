@@ -1,0 +1,86 @@
+@use "@angular/material" as mat;
+
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower:wght@300;400&display=auto");
+@import './variables.scss';
+
+@include mat.core();
+
+$my-app-primary: mat.define-palette(mat.$indigo-palette);
+$my-app-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$my-app-warn: mat.define-palette(mat.$red-palette);
+
+$my-app-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-app-primary,
+      accent: $my-app-accent,
+      warn: $my-app-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($my-app-theme);
+
+html,
+body {
+  height: 100%;
+}
+
+html,
+body,
+input,
+button,
+.mat-button,
+.mat-form-field,
+.mat-card,
+.title,
+.mat-h4 {
+  font-family: $base-font;
+}
+
+app-root {
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+mat-form-field {
+  width: 100%;
+
+  .mat-form-field-wrapper {
+    display: flex;
+    flex-direction: column;
+  
+    .mat-form-field-flex {
+        order: 1;
+    }
+
+    .mat-form-field-underline {
+        position: relative;
+        order: 2;
+        bottom: 0 !important;
+    }
+
+    .mat-form-field-subscript-wrapper {
+        position: relative;
+        order: 3;
+    }
+  }
+}
+
+.material-icons {
+  font-family: $material-icons-font;
+}
+
+.mat-toolbar {
+  background: #fff;
+  color: #000;
+}
+
+.color-accent {
+  color: red !important;
+}

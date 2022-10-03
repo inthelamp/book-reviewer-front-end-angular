@@ -1,0 +1,70 @@
+<div class="top-buttons">
+  <button mat-raised-button type="button" color="primary" (click)="onNewReview()">New Review</button> 
+  <button mat-raised-button type="button" color="warn" (click)="onDelete()">Delete</button>   
+  <button mat-raised-button type="button" color="accent" (click)="onChangeStatus()">{{ status.value == 'Published' ? 'Unpublish' : 'Publish' }}</button> 
+</div>
+<Form class="review-edit" [formGroup]="reviewEditForm" (ngSubmit)="onSubmit()">
+    <input type="hidden" [formControl]="status">
+    <input type="hidden" [formControl]="id">
+    <input matInput [formControl]="content" class="hide">
+    <mat-grid-list cols="12" rowHeight="4.5em">
+      <mat-grid-tile colspan="2" rowspan="3" class="book-cover-container">
+        <div class="filler"></div>   
+        <div class="book-cover">
+          <label for="book_cover_input">
+            <img id="book_cover_img" [src]="bookCoverImageURL" alt='book cover' />
+          </label>
+          <input id="book_cover_input" type="file" (change)="onUpLoadBookCover($event)">
+        </div>    
+      </mat-grid-tile>
+      <mat-grid-tile colspan="10" rowspan="1">
+        <mat-form-field appearance="fill">
+          <mat-label>Subject</mat-label>
+          <input type="text" matInput placeholder="Subject" [formControl]="subject">
+          <mat-error *ngIf="submitted && subject.hasError('maxlength')">The maximum size of Subject is 100 characters ({{ subject.value!.length }} characters)</mat-error>          
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="10" rowspan="1">
+        <mat-form-field appearance="fill">
+          <mat-label>Book Title</mat-label>
+          <input type="text" matInput placeholder="Book Title" [formControl]="bookTitle">
+          <mat-error *ngIf="submitted && bookTitle.hasError('maxlength')">The maximum size of Book Title is 100 characters ({{ bookTitle.value!.length }} characters)</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="10" rowspan="1">
+        <mat-form-field appearance="fill">
+          <mat-label>ISBN</mat-label>
+          <input type="text" matInput placeholder="ISBN number" [formControl]="isbn">
+          <mat-error *ngIf="(isbn.touched || submitted) && isbn.hasError('maxlength')">The maximum size of ISBN is 17 characters ({{ isbn.value!.length }} characters)</mat-error>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list cols="3" rowHeight="4.5em">
+    <ng-container formArrayName="bookAuthors">
+      <ng-container *ngFor="let formGroupControl of bookAuthors.controls; let i = index">
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field [formGroup]="getFormGroup(formGroupControl)" appearance="fill">
+            <input matInput formControlName="bookAuthor" placeholder="Book author">
+            <button *ngIf="(getBookAuthor(formGroupControl).value && i >= 0 && i + 1 < bookAuthors.controls.length) || (i + 1 == bookAuthors.controls.length)" 
+              type="button" mat-icon-button matSuffix (click)="deleteBookAuthor(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button *ngIf="(i + 1 == bookAuthors.controls.length && !maximumNoOfBookAuthorsAdded)" type="button" mat-icon-button matSuffix (click)="addBookAuthor(i)">
+              <mat-icon>add</mat-icon>
+            </button>                  
+          </mat-form-field>
+        </mat-grid-tile>
+      </ng-container>
+    </ng-container>
+  </mat-grid-list>
+    <div class="editor">
+      <div id="quill-edit" class="container"></div>
+    </div>
+    <mat-error *ngIf="submitted && content.hasError('required')">Review is required</mat-error>      
+    <mat-error *ngIf="submitted && content.hasError('maxlength')">
+      The size of review content including hidden control characters exceeds 4000 characters ({{content.value.length}} characters)
+    </mat-error>
+    <p>   
+      <button mat-raised-button type="submit" color="primary">Save</button>
+    </p>
+</Form>  

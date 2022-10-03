@@ -1,0 +1,45 @@
+<div class='user'> 
+    <Form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput placeholder="Email" [formControl]="email" required>
+      <mat-error *ngIf="(email.touched || submitted) && email.hasError('required')">Email is required</mat-error>
+      <mat-error *ngIf="email.touched && email.hasError('email')">Enter a valid email address</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input type="text" matInput placeholder="Name" [formControl]="username" required>
+      <mat-error *ngIf="(username.touched || submitted) && username.hasError('required')">Username is required</mat-error>
+      <mat-error *ngIf="username.touched && username.hasError('minlength')">Minimum 3 characters</mat-error>
+    </mat-form-field>    
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput [type]="hidePassword ? 'password' : 'text'" placeholder="Password" [formControl]="password" required>
+      <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="(password.touched || submitted) && password.hasError('required')">Password is required</mat-error>            
+      <mat-error *ngIf="password.touched && password.hasError('invalid')">Minimum eight characters, at least one uppercase letter, one lowercase letter and one number</mat-error>
+    </mat-form-field>   
+    <mat-form-field appearance="fill">
+      <mat-label>Password Confirm</mat-label>
+      <input matInput [type]="hideComfirmPassword ? 'password' : 'text'" placeholder="Password" [formControl]="confirmPassword" required>
+      <button type="button" mat-icon-button matSuffix (click)="hideComfirmPassword = !hideComfirmPassword" [attr.aria-label]="'Hide password confirm'" [attr.aria-pressed]="hideComfirmPassword">
+        <mat-icon>{{hideComfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="(confirmPassword.touched || submitted) && confirmPassword.hasError('required')">Password Confirm is required</mat-error>            
+      <mat-error *ngIf="confirmPassword.touched && confirmPassword.hasError('invalid')">Minimum eight characters, at least one uppercase letter, one lowercase letter and one number</mat-error>
+      <mat-error *ngIf="confirmPassword.touched && confirmPassword.hasError('mismatched')">Passwords are mismatched</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Select a birthday</mat-label>
+      <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY" [formControl]="birthday">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="birthday.touched && birthday.hasError('matDatepickerParse')">Invalid birthday</mat-error>
+    </mat-form-field>        
+    <p>
+      <button mat-raised-button type="submit" color="primary" >Sign up</button>
+    </p>
+  </Form>      
+ </div> 

@@ -1,0 +1,13 @@
+<div class="home">
+    <mat-sidenav-container autosize>
+        <mat-sidenav mode="side" opened>
+            <app-my-review-list *ngIf="isAuthenticated()" ></app-my-review-list>
+            <app-other-review-list></app-other-review-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <app-review-draft *ngIf="!isMyReviewSelected() && !isOtherReviewSelected()"></app-review-draft>
+            <app-review-edit *ngIf="isAuthenticated() && isMyReviewSelected()"></app-review-edit>
+            <app-review-browse *ngIf="isOtherReviewSelected()"></app-review-browse>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

@@ -1,0 +1,163 @@
+/* Defining review classes*/
+@mixin define-review($operation) {
+    .review-#{$operation} {
+        @if ($operation == 'edit' or $operation == 'browse') {
+            padding: 2vmin 3vmin;
+        } @else if $operation == 'browse-content' {
+            padding: 0px 3vmin;
+        }
+
+        @if ($operation == 'edit' or $operation == 'browse') {
+            .book-cover-container ::ng-deep .mat-grid-tile-content {
+                display: block;
+
+                .book-cover {
+                    padding: 0;
+
+                    @if $operation == 'edit' {
+                        label { 
+                            cursor: pointer;
+    
+                            img {
+                                border: thin solid #a9b3ee;
+                                width: 9em;
+                                height: 12em;
+                                object-fit:fill;
+                            }
+                        }
+                    } @else {
+                        img {
+                            border: thin solid #a9b3ee;
+                            width: 9em;
+                            height: 12em;
+                            object-fit:fill;
+                        }
+                    }
+
+                    input {
+                        display: none;
+                    }
+                
+                }
+                
+                .filler {
+                    width: 100%;    
+                    height: 5%;
+                }    
+            }
+        }
+
+        @if $operation == 'edit' {
+            .hide {
+                display: block;
+                visibility: hidden;
+                height: 0;
+                width: 0;
+            }
+        }
+
+        @if ($operation == 'edit' or $operation == 'browse-content') {
+            .editor {
+                width: 100%;
+                height: auto;
+                text-align: left;
+                
+                .container {
+                    min-height: 30vmax;
+                    max-height: 95%;
+                    font-family: "Times New Roman", sans-serif;
+                    font-size: 18px;
+                    cursor: text;  
+                }
+            }
+        }
+
+        @if $operation == 'list' {
+            // list-style-type: none;
+            text-align: left;
+            margin: 1em 1em 2em 1em;
+            padding: 0;
+            max-height: 30vmin;
+            overflow-y: auto;
+        
+            li {
+                position: relative;
+                margin-bottom: 1em;
+                cursor: default;
+                word-wrap: break-word;
+        
+                &:hover {
+                    left: .1em;
+                }
+                
+                span {
+                    display: inline-block;
+                    width: 75%;
+                }
+        
+                button {
+                    margin-left: 1em;
+                    width: 15%;
+                }  
+            }
+        }    
+    }
+}
+  
+@include define-review("edit");
+@include define-review("browse");
+@include define-review("browse-content");
+@include define-review("list");
+
+/* Defining  mat-card classes */
+@mixin define-card($location) {
+    .mat-card-#{$location} {
+        width: 100%;
+        text-align: left;
+        padding: 0px 0px 5px 0px;
+
+        @if $location == 'right'{
+            margin: 0px 1px;
+        } @else {
+            margin-top: 10px;
+        }
+
+        mat-card-subtitle {
+            margin-bottom: 5px;
+        }
+    }
+} 
+
+@include define-card("right");
+@include define-card("below");
+
+.home {
+    display: flex;
+    justify-content: center;
+
+    mat-sidenav-container {        
+        width: 70%;
+    }
+
+    mat-sidenav {
+        width: 30%
+    } 
+    
+    mat-sidenav-content {
+        width: 70%;
+        background-color: white;    
+    }
+}
+    
+h3 {
+    text-align: left !important;
+}
+
+.top-buttons {
+    text-align: left;
+    padding-left: 3vmin;
+
+    &::ng-deep button {
+        margin-right: 1vmin;
+    }
+}

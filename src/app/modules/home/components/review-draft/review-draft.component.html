@@ -1,0 +1,11 @@
+<Form class="review-edit" [formGroup]="reviewDraftForm" (ngSubmit)="onSubmit()">
+    <input matInput [formControl]="content" class="hide">
+    <div class="editor">
+      <div id="quill-draft" class="container"></div>
+    </div>
+    <mat-error *ngIf="submitted && content.hasError('required')">Review is required</mat-error>      
+    <mat-error *ngIf="submitted && content.hasError('maxlength')">The size of review content including hidden control characters exceeds 4000 characters ({{content.value.length}} characters)</mat-error>
+    <p>   
+      <button mat-raised-button type="submit" color="primary">Save</button>  
+    </p>
+</Form>  

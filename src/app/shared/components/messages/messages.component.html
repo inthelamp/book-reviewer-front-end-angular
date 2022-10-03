@@ -1,0 +1,7 @@
+<div *ngIf="message">
+    <div class="color-accent"> {{message}} 
+        <button *ngIf="!isDelivered()" type="button" mat-icon-button matSuffix (click)="onClick()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+</div>

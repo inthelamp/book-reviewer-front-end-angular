@@ -1,0 +1,7 @@
+<h3>My Reviews</h3>
+<ul class="review-list">
+    <li *ngFor="let reviewSubject of myReviewSubjects">
+        <span>{{ reviewSubject.subject }}</span>
+        <button type="button" mat-raised-button (click)="onClick(reviewSubject.id)">Select</button>
+    </li>
+</ul>

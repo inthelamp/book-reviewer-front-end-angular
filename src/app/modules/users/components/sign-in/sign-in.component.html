@@ -1,0 +1,23 @@
+<div class="user">
+    <Form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput placeholder="Email" [formControl]="email" required>
+          <mat-error *ngIf="(email.touched || submitted) && email.hasError('required')">Email is required</mat-error>
+          <mat-error *ngIf="email.touched && email.hasError('email')">Enter a valid email address</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" [formControl]="password" required>
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="(password.touched || submitted) && password.hasError('required')">Password is required</mat-error>            
+            <mat-error *ngIf="password.touched && password.hasError('invalid')">Minimum eight characters, at least one uppercase letter, one lowercase letter and one number</mat-error>
+        </mat-form-field>  
+        <p>   
+          <button mat-raised-button type="submit" color="primary">Sign In</button>  
+        </p>
+      <p>New Book Reviewer?&nbsp;<a routerLink="/signup">Create an account</a></p>
+    </Form>    
+</div>

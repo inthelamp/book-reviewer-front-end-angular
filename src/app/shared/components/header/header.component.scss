@@ -1,0 +1,28 @@
+.nav {
+    justify-content: space-evenly;
+    
+    a, a:visited, a:hover, a:active {
+        text-decoration: none;
+        color: inherit;
+    }    
+
+    .nav-home {
+        width: 17vw !important;
+        padding: 0;
+
+        .nav-brand {
+            white-space: normal;
+            text-align: center;
+            word-break: break-all;
+
+            .title {
+                font-size: larger;
+            }
+        }
+    }
+
+    .nav-login {
+        width: 17vw !important;
+        padding: 0;
+    }
+}

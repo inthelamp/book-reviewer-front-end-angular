@@ -1,0 +1,47 @@
+<div class="review-browse" *ngIf="review">
+  <mat-grid-list cols="12" rowHeight="4.5em">
+    <mat-grid-tile colspan="2" rowspan="3" class="book-cover-container">
+      <div class="filler"></div>   
+      <div class="book-cover">
+        <img [src]="bookCoverImageURL" alt='book cover' />
+      </div>    
+    </mat-grid-tile>
+    <mat-grid-tile colspan="10" rowspan="1">
+      <mat-card class="mat-card-right">
+        <mat-card-subtitle>Subject</mat-card-subtitle>
+        <mat-card-content>
+          <p>{{ review.subject }}</p>
+        </mat-card-content>
+      </mat-card>  
+    </mat-grid-tile>
+    <mat-grid-tile colspan="10" rowspan="1">
+      <mat-card class="mat-card-right">
+          <mat-card-subtitle>Book Title</mat-card-subtitle>
+          <mat-card-content>
+            <p>{{ review.bookTitle }}</p>
+          </mat-card-content>
+        </mat-card>  
+    </mat-grid-tile>
+    <mat-grid-tile colspan="10" rowspan="1">
+      <mat-card class="mat-card-right">
+          <mat-card-subtitle>ISBN</mat-card-subtitle>
+          <mat-card-content>
+            <p>{{ review.isbn }}</p>
+          </mat-card-content>
+        </mat-card> 
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-card class="mat-card-below">
+      <mat-card-subtitle>Book Authors</mat-card-subtitle>
+      <mat-card-content>
+          <p>{{ getBookAuthorsToString() }}</p>
+      </mat-card-content>
+  </mat-card>
+</div>
+<div class="review-browse-content">
+  <input type="hidden" id="content" name="content">
+  <div class="editor">
+    <div id="quill-browse" class="container"></div>
+  </div>
+</div>
+

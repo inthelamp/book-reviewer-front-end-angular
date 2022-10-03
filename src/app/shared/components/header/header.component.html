@@ -1,0 +1,23 @@
+<mat-toolbar color="white">
+  <mat-toolbar-row class="nav">
+    <div class="nav-home">       
+      <a class="nav-brand" mat-button (click)="onClick()" [routerLink]="'/home'" >
+        <img class="App-logo" src="/assets/images/logo.png" alt='Logo' />
+        <span class="title"> Book Reviewer </span>
+      </a>
+    </div>
+    <div>
+      <a mat-button (click)="onClick()" [routerLink]="'/new'"> New </a>
+      <a mat-button (click)="onClick()" [routerLink]="'/reviews'"> Reviews </a>
+      <a mat-button (click)="onClick()" [routerLink]="'/myreviews'"> My Reviews </a>
+    </div>
+    <div class="nav-login" *ngIf="!isAuthenticated()">
+      <a mat-button (click)="onClick()" [routerLink]="'/signin'"> Sign in </a>
+      <a mat-button (click)="onClick()" [routerLink]="'/signup'"> Sign up </a>
+    </div>
+    <div class="nav-login" *ngIf="isAuthenticated()">
+      <span class="mat-h4">Hello {{ getUserName().concat(!isUserActive() ? " [Inactive]" : "" )}}</span>
+      <button mat-button (click)="onSignOut()">Sign out</button>      
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
